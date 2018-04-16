@@ -1,0 +1,16 @@
+package logika;
+
+// V OCamlu:
+// type igralec = X | O
+
+public enum Igralec {
+	X, O;
+
+	public Igralec nasprotnik() {
+		return (this == X ? O : X);
+	}
+
+	public Polje getPolje() {
+		return (this == X ? Polje.X : Polje.O);
+	}
+}
