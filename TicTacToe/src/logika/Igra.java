@@ -8,7 +8,7 @@ public class Igra {
 	/**
 	 * Velikost igralne pološče je N x N.
 	 */
-	public static final int N = 3;
+	public static final int N = 4;
 
 	
 	/**
@@ -26,20 +26,22 @@ public class Igra {
 		// spremenljivk.
 		
 		// Iniciraliziramo trojke
-		int[][] smer = {{1,0}, {0,1}, {1,1}};
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
+		int[][] smer = {{1,0}, {0,1}, {1,1}, {1,-1}};
+		for (int x = 0; x < N; x++) {
+			for (int y = 0; y < N; y++) {
 				for (int[] s : smer) {
-					int di = s[0];
-					int dj = s[1];
-					if ((i + (N-1) * di < N) && (j + (N-1) * dj < N)) {
-						int[] x = new int[3];
-						int[] y = new int[3];
+					int dx = s[0];
+					int dy = s[1];
+					// če je skrajno polje trojke še na plošči, jo dodamo med trojke
+					if ((0 <= x + (N-1) * dx) && (x + (N-1) * dx < N) && 
+						(0 <= y + (N-1) * dy) && (y + (N-1) * dy < N)) {
+						int[] trojka_x = new int[N];
+						int[] trojka_y = new int[N];
 						for (int k = 0; k < N; k++) {
-							x[0] = i + di * k;
-							y[1] = j + dj * k;
+							trojka_x[k] = x + dx * k;
+							trojka_y[k] = y + dy * k;
 						}
-						trojke.add(new Trojka(x, y));
+						trojke.add(new Trojka(trojka_x, trojka_y));
 					}
 				}
 			}
@@ -57,6 +59,20 @@ public class Igra {
 			}
 		}
 		naPotezi = Igralec.O;
+	}
+	
+	public Igra(Igra igra) {
+		plosca = new Polje[N][N];
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				plosca[i][j] = igra.plosca[i][j];
+			}
+		}
+		this.naPotezi = igra.naPotezi;
+	}
+
+	public Polje[][] getPlosca() {
+		return plosca;
 	}
 
 	/**
@@ -87,6 +103,9 @@ public class Igra {
 	}
 
 	/**
+	 * Ta metoda bi lahko bila prepočasna. Ideje za pohitritev:
+	 * ...
+	 * 
 	 * @return trenutno stanje igre
 	 */
 	public Stanje stanje() {
@@ -99,7 +118,7 @@ public class Igra {
 				return s;
 			}
 			else if (vse_enake(t, Polje.X)) {
-				Stanje s = Stanje.ZMAGA_O;
+				Stanje s = Stanje.ZMAGA_X;
 				s.setZmagovalna(t);
 				return s;
 			}

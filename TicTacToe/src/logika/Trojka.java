@@ -1,5 +1,7 @@
 package logika;
 
+import java.util.Arrays;
+
 /**
  * @author andrej
  * Objekt, ki predstavlja eno trojko na plošči.
@@ -13,5 +15,10 @@ public class Trojka {
 	public Trojka(int[] x, int y[]) {
 		this.x = x;
 		this.y = y;
+	}
+
+	@Override
+	public String toString() {
+		return "Trojka [x=" + Arrays.toString(x) + ", y=" + Arrays.toString(y) + "]";
 	}
 }

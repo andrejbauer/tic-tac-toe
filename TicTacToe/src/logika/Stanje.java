@@ -14,11 +14,12 @@ public enum Stanje {
 	
 	private Stanje() { zmagovalna = null; }
 
-	void setZmagovalna(Trojka t) {
+	public void setZmagovalna(Trojka t) {
+		assert (this == ZMAGA_O || this == ZMAGA_X);
 		zmagovalna = t;
 	}
 	
-	Trojka getZmagovalna() {
+	public Trojka getZmagovalna() {
 		return zmagovalna;
 	}
 }
