@@ -8,7 +8,7 @@ public class Igra {
 	/**
 	 * Velikost igralne pološče je N x N.
 	 */
-	public static final int N = 4;
+	public static final int N = 3;
 
 	
 	/**
@@ -61,6 +61,9 @@ public class Igra {
 		naPotezi = Igralec.O;
 	}
 	
+	/**
+	 * @param igra nova kopija dane igre
+	 */
 	public Igra(Igra igra) {
 		plosca = new Polje[N][N];
 		for (int i = 0; i < N; i++) {

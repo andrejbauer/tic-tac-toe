@@ -20,12 +20,12 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 	/**
 	 * Relativna širina črte
 	 */
-	private final static double LINE_WIDTH = 0.15;
+	private final static double LINE_WIDTH = 0.1;
 	
 	/**
 	 * Relativni prostor okoli X in O
 	 */
-	private final static double PADDING = 0.2;
+	private final static double PADDING = 0.1;
 	
 	public IgralnoPolje(GlavnoOkno master) {
 		super();
@@ -96,8 +96,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 					}
 				}
 			}
-		}
-		
+		}	
 	}
 
 	@Override

@@ -18,16 +18,35 @@ import logika.Poteza;
 
 @SuppressWarnings("serial")
 public class GlavnoOkno extends JFrame implements ActionListener {
+	/**
+	 * JPanel, v katerega rišemo X in O
+	 */
 	private IgralnoPolje polje;
+
+	/**
+	 * Statusna vrstica v spodnjem delu okna
+	 */
 	private JLabel status;
+
+	
+	/**
+	 * Logika igre, null če se igra trenutno ne igra
+	 */
 	private Igra igra;
 	
+	/**
+	 * Strateg, ki vleče poteze X.
+	 */
 	private Strateg strategX;
+
+	/**
+	 * Strateg, ki vleče poteze O
+	 */
 	private Strateg strategO;
 	
 	// Izbire v menujih
 	private JMenuItem nova_igra;
-	
+
 	public GlavnoOkno() {
 		this.setTitle("Tic tac toe");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -63,7 +82,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		status_layout.anchor = GridBagConstraints.CENTER;
 		getContentPane().add(status, status_layout);
 		
-		// začenmo novo igro
+		// začnemo novo igro
 		nova_igra();
 	}
 	
@@ -80,6 +99,12 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		this.igra = new Igra();
 		strategO = new Clovek(this);
 		strategX = new Racunalnik(this);
+		// Tistemu, ki je na potezi, to povemo
+		switch (igra.stanje()) {
+		case NA_POTEZI_O: strategO.na_potezi(); break;
+		case NA_POTEZI_X: strategX.na_potezi(); break;
+		default: break;
+		}
 		osveziGUI();
 		repaint();
 	}
@@ -134,6 +159,9 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		}		
 	}
 
+	/**
+	 * @return kopija trenutne igre
+	 */
 	public Igra copyIgra() {
 		return new Igra(igra);
 	}
