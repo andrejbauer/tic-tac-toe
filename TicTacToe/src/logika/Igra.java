@@ -109,16 +109,34 @@ public class Igra {
 
 	/**
 	 * @param t
-	 * @param p
-	 * @return ali so v terici t vsa polja enaka polju p?
+	 * @return igralec, ki ima zapolnjeno terico t, ali null, če nihče
 	 */
-	private boolean vse_enake(Terica t, Polje p) {
-		for (int k = 0; k < N; k++) {
-			if (plosca[t.x[k]][t.y[k]] != p) { return false; }
+	private Igralec cigavaTerica(Terica t) {
+		int count_X = 0;
+		int count_O = 0;
+		for (int k = 0; k < N && (count_X == 0 || count_O == 0); k++) {
+			switch (plosca[t.x[k]][t.y[k]]) {
+			case O: count_O += 1; break;
+			case X: count_X += 1; break;
+			case PRAZNO: break;
+			}
 		}
-		return true;
+		if (count_O == N) { return Igralec.O; }
+		else if (count_X == N) { return Igralec.X; }
+		else { return null; }
 	}
 
+	/**
+	 * @return zmagovalna terica, ali null, če je ni
+	 */
+	public Terica zmagovalnaTerica() {
+		for (Terica t : terice) {
+			Igralec lastnik = cigavaTerica(t);
+			if (lastnik != null) { return t; }
+		}
+		return null;
+	}
+	
 	/**
 	 * Ta metoda bi lahko bila prepočasna. Ideje za pohitritev:
 	 * ...
@@ -127,17 +145,12 @@ public class Igra {
 	 */
 	public Stanje stanje() {
 		// Ali imamo zmagovalca?
-		for (Terica t : terice) {
-			if (vse_enake(t, Polje.O)) {
-				// Našli smo terico s tremi O
-				Stanje s = Stanje.ZMAGA_O;
-				s.setZmagovalna(t);
-				return s;
-			}
-			else if (vse_enake(t, Polje.X)) {
-				Stanje s = Stanje.ZMAGA_X;
-				s.setZmagovalna(t);
-				return s;
+		Terica t = zmagovalnaTerica();
+		if (t != null) {
+			switch (plosca[t.x[0]][t.y[0]]) {
+			case O: return Stanje.ZMAGA_O; 
+			case X: return Stanje.ZMAGA_X;
+			case PRAZNO: assert false;
 			}
 		}
 		// Ali imamo kakšno prazno polje?

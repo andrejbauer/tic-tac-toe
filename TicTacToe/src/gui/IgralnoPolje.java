@@ -91,7 +91,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 
-	double w = squareWidth();
+		double w = squareWidth();
 
 		// črte
 		g2.setColor(Color.black);
@@ -107,6 +107,8 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 					    (int)(i * w));
 		}
 		
+		// TODO če imamo zmagovalno terico, njeno ozadje pobarvamo
+
 		// križci in krožci
 		Polje[][] plosca = master.getPlosca();
 		if (plosca != null) {
