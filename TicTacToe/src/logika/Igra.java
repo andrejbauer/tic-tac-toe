@@ -12,13 +12,21 @@ public class Igra {
 
 	
 	/**
-	 * Pomožen seznam vseh trojk na plošči.
+	 * Pomožen seznam vseh teric na plošči.
 	 */
-	private static final List<Trojka> trojke = new LinkedList<Trojka>();
+	private static final List<Terica> terice = new LinkedList<Terica>();
 
-	// Atributi objekta iz razreda Igra
 
+	/**
+	 * Igralno polje
+	 */
 	private Polje[][] plosca;
+	
+	
+	/**
+	 * Igralec, ki je trenutno na potezi.
+	 * Vrednost je poljubna, če je igre konec (se pravi, lahko je napačna).
+	 */
 	private Igralec naPotezi;
 
 	static {
@@ -26,23 +34,23 @@ public class Igra {
 		// Njena naloga je, da inicializira vrednosti statičnih
 		// spremenljivk.
 		
-		// Iniciraliziramo trojke
+		// Iniciraliziramo N-terice
 		int[][] smer = {{1,0}, {0,1}, {1,1}, {1,-1}};
 		for (int x = 0; x < N; x++) {
 			for (int y = 0; y < N; y++) {
 				for (int[] s : smer) {
 					int dx = s[0];
 					int dy = s[1];
-					// če je skrajno polje trojke še na plošči, jo dodamo med trojke
+					// če je skrajno polje terice še na plošči, jo dodamo med terice
 					if ((0 <= x + (N-1) * dx) && (x + (N-1) * dx < N) && 
 						(0 <= y + (N-1) * dy) && (y + (N-1) * dy < N)) {
-						int[] trojka_x = new int[N];
-						int[] trojka_y = new int[N];
+						int[] terica_x = new int[N];
+						int[] terica_y = new int[N];
 						for (int k = 0; k < N; k++) {
-							trojka_x[k] = x + dx * k;
-							trojka_y[k] = y + dy * k;
+							terica_x[k] = x + dx * k;
+							terica_y[k] = y + dy * k;
 						}
-						trojke.add(new Trojka(trojka_x, trojka_y));
+						terice.add(new Terica(terica_x, terica_y));
 					}
 				}
 			}
@@ -97,9 +105,9 @@ public class Igra {
 	/**
 	 * @param t
 	 * @param p
-	 * @return ali so v trojki t vsa polja enaka polju p?
+	 * @return ali so v terici t vsa polja enaka polju p?
 	 */
-	private boolean vse_enake(Trojka t, Polje p) {
+	private boolean vse_enake(Terica t, Polje p) {
 		for (int k = 0; k < N; k++) {
 			if (plosca[t.x[k]][t.y[k]] != p) { return false; }
 		}
@@ -114,9 +122,9 @@ public class Igra {
 	 */
 	public Stanje stanje() {
 		// Ali imamo zmagovalca?
-		for (Trojka t : trojke) {
+		for (Terica t : terice) {
 			if (vse_enake(t, Polje.O)) {
-				// Našli smo trojko s tremi O
+				// Našli smo terico s tremi O
 				Stanje s = Stanje.ZMAGA_O;
 				s.setZmagovalna(t);
 				return s;

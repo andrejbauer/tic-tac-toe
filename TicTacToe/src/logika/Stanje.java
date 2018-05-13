@@ -10,16 +10,16 @@ public enum Stanje {
 	/**
 	 * Zmagovalna trojka, ali null, če je ni
 	 */
-	private Trojka zmagovalna;
+	private Terica zmagovalna;
 	
 	private Stanje() { zmagovalna = null; }
 
-	public void setZmagovalna(Trojka t) {
+	public void setZmagovalna(Terica t) {
 		assert (this == ZMAGA_O || this == ZMAGA_X);
 		zmagovalna = t;
 	}
 	
-	public Trojka getZmagovalna() {
+	public Terica getZmagovalna() {
 		return zmagovalna;
 	}
 }
