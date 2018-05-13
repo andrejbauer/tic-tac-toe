@@ -15,6 +15,7 @@ import javax.swing.JMenuItem;
 import logika.Igra;
 import logika.Polje;
 import logika.Poteza;
+import logika.Terica;
 
 /**
  * Glavno okno aplikacije, hrani trenutno stanje igre in nadzoruje potek
@@ -179,6 +180,12 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		}		
 	}
 
+	/**
+	 * @return zmagovalna terica, če obstaja, sicer null.
+	 */
+	public Terica zmagovalnaTerica() {
+		return igra.zmagovalnaTerica();
+	}
 	/**
 	 * @return kopija trenutne igre
 	 */

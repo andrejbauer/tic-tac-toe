@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import logika.Igra;
 import logika.Polje;
+import logika.Terica;
 
 /**
  * Pravokotno območje, v katerem je narisano igralno polje.
@@ -93,6 +94,17 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 
 		double w = squareWidth();
 
+		// če imamo zmagovalno terico, njeno ozadje pobarvamo
+		Terica t = master.zmagovalnaTerica();
+		if (t != null) {
+			g2.setColor(new Color(255, 255, 196));
+			for (int k = 0; k < Igra.N; k++) {
+				int i = t.x[k];
+				int j = t.y[k];
+				g2.fillRect((int)(w * i), (int)(w * j), (int)w, (int)w);
+			}
+		}
+		
 		// črte
 		g2.setColor(Color.black);
 		g2.setStroke(new BasicStroke((float) (w * LINE_WIDTH)));
@@ -107,8 +119,6 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 					    (int)(i * w));
 		}
 		
-		// TODO če imamo zmagovalno terico, njeno ozadje pobarvamo
-
 		// križci in krožci
 		Polje[][] plosca = master.getPlosca();
 		if (plosca != null) {
