@@ -21,7 +21,8 @@ public class Igra {
 	private Polje[][] plosca;
 	private Igralec naPotezi;
 
-	{   // Ta koda se izvede na začetku, ko se prvič požene program.
+	static {
+		// Ta koda se izvede na začetku, ko se prvič požene program.
 		// Njena naloga je, da inicializira vrednosti statičnih
 		// spremenljivk.
 		
