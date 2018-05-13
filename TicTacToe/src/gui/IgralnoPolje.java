@@ -110,12 +110,12 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		g2.setStroke(new BasicStroke((float) (w * LINE_WIDTH)));
 		for (int i = 1; i < Igra.N; i++) {
 			g2.drawLine((int)(i * w),
-					    (int)(LINE_WIDTH * w),
+					    (int)(0),
 					    (int)(i * w),
-					    (int)((Igra.N - LINE_WIDTH) * w));
-			g2.drawLine((int)(LINE_WIDTH * w),
+					    (int)(Igra.N * w));
+			g2.drawLine((int)(0),
 					    (int)(i * w),
-					    (int)((Igra.N - LINE_WIDTH) * w),
+					    (int)(Igra.N * w),
 					    (int)(i * w));
 		}
 		
