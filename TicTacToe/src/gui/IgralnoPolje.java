@@ -13,6 +13,12 @@ import javax.swing.JPanel;
 import logika.Igra;
 import logika.Polje;
 
+/**
+ * Pravokotno območje, v katerem je narisano igralno polje.
+ * 
+ * @author andrej
+ *
+ */
 @SuppressWarnings("serial")
 public class IgralnoPolje extends JPanel implements MouseListener {
 	private GlavnoOkno master;
@@ -39,10 +45,20 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		return new Dimension(400, 400);
 	}
 
+	/**
+	 * @return širina enega kvadratka
+	 */
 	private double squareWidth() {
 		return Math.min(getWidth(), getHeight()) / Igra.N;
 	}
 	
+	/**
+	 * V grafični kontekst g2 nariši križec v polje (i,j)
+	 * 
+	 * @param g2
+	 * @param i
+	 * @param j
+	 */
 	private void paintX(Graphics2D g2, int i, int j) {
 		double w = squareWidth();
 		double r = w * (1.0 - LINE_WIDTH - 2.0 * PADDING); // sirina X
@@ -54,6 +70,12 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		g2.drawLine((int)(x + r), (int)y, (int)x, (int)(y + r));
 	}
 	
+	/**
+	 * V grafični kontekst g2 nariši križec v polje (i,j)
+	 * @param g2
+	 * @param i
+	 * @param j
+	 */
 	private void paintO(Graphics2D g2, int i, int j) {
 		double w = squareWidth();
 		double r = w * (1.0 - LINE_WIDTH - 2.0 * PADDING); // premer O
@@ -68,8 +90,9 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		// širina kvadratka
-		double w = squareWidth();
+
+	double w = squareWidth();
+
 		// črte
 		g2.setColor(Color.black);
 		g2.setStroke(new BasicStroke((float) (w * LINE_WIDTH)));

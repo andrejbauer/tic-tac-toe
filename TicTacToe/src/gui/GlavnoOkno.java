@@ -16,6 +16,13 @@ import logika.Igra;
 import logika.Polje;
 import logika.Poteza;
 
+/**
+ * Glavno okno aplikacije, hrani trenutno stanje igre in nadzoruje potek
+ * igre.
+ * 
+ * @author andrej
+ *
+ */
 @SuppressWarnings("serial")
 public class GlavnoOkno extends JFrame implements ActionListener {
 	/**
@@ -47,6 +54,9 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	// Izbire v menujih
 	private JMenuItem nova_igra;
 
+	/**
+	 * Ustvari novo glavno okno in prični igrati igro.
+	 */
 	public GlavnoOkno() {
 		this.setTitle("Tic tac toe");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -93,6 +103,10 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		return (igra == null ? null : igra.getPlosca());
 	}
 	
+	/**
+	 * Začni igrati novo igro. Metodo lahko pokličemo kadarkoli in
+	 * bo pravilno ustavila morebitno trenutno igro.
+	 */
 	public void nova_igra() {
 		if (strategO != null) { strategO.prekini(); }
 		if (strategX != null) { strategX.prekini(); }
@@ -144,6 +158,12 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		polje.repaint();
 	}
 	
+	/**
+	 * Metoda, ki pravilno ukrepa, ko uporabnik klikne na polje (i,j).
+	 * 
+	 * @param i
+	 * @param j
+	 */
 	public void klikniPolje(int i, int j) {
 		if (igra != null) {
 			switch (igra.stanje()) {

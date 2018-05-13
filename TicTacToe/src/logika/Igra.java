@@ -71,7 +71,9 @@ public class Igra {
 	}
 	
 	/**
-	 * @param igra nova kopija dane igre
+	 * Nova kopija dane igre
+	 * 
+	 * @param igra
 	 */
 	public Igra(Igra igra) {
 		plosca = new Polje[N][N];
@@ -83,6 +85,9 @@ public class Igra {
 		this.naPotezi = igra.naPotezi;
 	}
 
+	/**
+	 * @return plošča polj (ne spreminjaj!)
+	 */
 	public Polje[][] getPlosca() {
 		return plosca;
 	}

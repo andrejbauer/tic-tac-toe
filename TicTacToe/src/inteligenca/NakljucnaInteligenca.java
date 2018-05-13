@@ -10,6 +10,12 @@ import gui.GlavnoOkno;
 import logika.Igra;
 import logika.Poteza;
 
+/**
+ * Inteligenca, ki ni ravno inteligenta, saj izbira naključne poteze.
+ * 	
+ * @author andrej
+ *
+ */
 public class NakljucnaInteligenca extends SwingWorker<Poteza, Object> {
 
 	private GlavnoOkno master;
@@ -21,17 +27,7 @@ public class NakljucnaInteligenca extends SwingWorker<Poteza, Object> {
 	@Override
 	protected Poteza doInBackground() throws Exception {
 		Igra igra = master.copyIgra();
-		for (int i = 0; i < 5; i++) {
-			System.out.println("mislim...");
-			try {
-				Thread.sleep(200);
-			} catch (InterruptedException e) { }
-			if (this.isCancelled()) {
-				System.out.println("Prekinili so me!");
-				return null;
-			}
-		}
-		System.out.println("Igram");
+		Thread.sleep(100);
 		Random r = new Random();
 		List<Poteza> poteze = igra.poteze();
 		Poteza p = poteze.get(r.nextInt(poteze.size()));
