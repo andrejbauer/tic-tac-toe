@@ -14,7 +14,7 @@ public class Igra {
 	/**
 	 * Pomožen seznam vseh teric na plošči.
 	 */
-	private static final List<Terica> terice = new LinkedList<Terica>();
+	public static final List<Terica> terice = new LinkedList<Terica>();
 
 
 	/**

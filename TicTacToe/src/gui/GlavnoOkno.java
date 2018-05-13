@@ -13,6 +13,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import logika.Igra;
+import logika.Igralec;
 import logika.Polje;
 import logika.Poteza;
 import logika.Terica;
@@ -109,11 +110,14 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	 * bo pravilno ustavila morebitno trenutno igro.
 	 */
 	public void nova_igra() {
+		// Prekinemo stratege
 		if (strategO != null) { strategO.prekini(); }
 		if (strategX != null) { strategX.prekini(); }
+		// Ustvarimo novo igro
 		this.igra = new Igra();
-		strategO = new Clovek(this);
-		strategX = new Racunalnik(this);
+		// Ustvarimo nove stratege
+		strategO = new Clovek(this, Igralec.O);
+		strategX = new Racunalnik(this, Igralec.X);
 		// Tistemu, ki je na potezi, to povemo
 		switch (igra.stanje()) {
 		case NA_POTEZI_O: strategO.na_potezi(); break;

@@ -2,8 +2,6 @@ package inteligenca;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
-
 import javax.swing.SwingWorker;
 
 import gui.GlavnoOkno;
