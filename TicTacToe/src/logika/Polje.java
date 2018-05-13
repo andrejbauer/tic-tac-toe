@@ -1,5 +1,9 @@
 package logika;
 
+/**
+ * @author andrej
+ * Možne vrednosti polj na plošči.
+ */
 public enum Polje {
 	PRAZNO,
 	X,

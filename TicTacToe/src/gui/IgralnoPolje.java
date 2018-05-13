@@ -72,7 +72,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 	}
 	
 	/**
-	 * V grafični kontekst g2 nariši križec v polje (i,j)
+	 * V grafični kontekst {@g2} nariši križec v polje {@(i,j)}
 	 * @param g2
 	 * @param i
 	 * @param j

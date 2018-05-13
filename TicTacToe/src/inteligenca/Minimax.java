@@ -48,6 +48,13 @@ public class Minimax extends SwingWorker<Poteza, Object> {
 		}
 	}
 
+	/**
+	 * Z metodo minimax poišči najboljšo potezo v dani igri.
+	 * 
+	 * @param k števec globine, do kje smo že preiskali
+	 * @param igra
+	 * @return najboljša poteza (ali null, če ji ni), skupaj z oceno najboljše poteze
+	 */
 	private OcenjenaPoteza minimax(int k, Igra igra) {
 		Igralec naPotezi = null;
 		// Ugotovimo, ali je konec, ali je kdo na potezi?
@@ -75,6 +82,11 @@ public class Minimax extends SwingWorker<Poteza, Object> {
 					null,
 					Ocena.oceniPozicijo(jaz, igra));
 		}
+		// Hranimo najboljšo do sedaj videno potezo in njeno oceno.
+		// Tu bi bilo bolje imeti seznam do sedaj videnih najboljših potez, ker je lahko
+		// v neki poziciji več enakovrednih najboljših potez. Te bi lahko zbrali
+		// v seznam, potem pa vrnili naključno izbrano izmed najboljših potez, kar bi
+		// popestrilo igro računalnika.
 		Poteza najboljsa = null;
 		int ocenaNajboljse = 0;
 		for (Poteza p : igra.poteze()) {
@@ -92,6 +104,7 @@ public class Minimax extends SwingWorker<Poteza, Object> {
 				ocenaNajboljse = ocena_p;
 			}
 		}
+		// Vrnemo najboljšo najdeno potezo in njeno oceno
 		return new OcenjenaPoteza(najboljsa, ocenaNajboljse);
 	}
 	

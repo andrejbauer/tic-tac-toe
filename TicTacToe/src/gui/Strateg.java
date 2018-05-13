@@ -21,7 +21,7 @@ public abstract class Strateg {
 	 * @param i
 	 * @param j
 	 * 
-	 * Glanvo okno kliče to metodo, ko uporabnik klikne na polje (i,j).
+	 * Glanvo okno kliče to metodo, ko uporabnik klikne na polje {@(i,j)}.
 	 */
 	public abstract void klik(int i, int j);
 }

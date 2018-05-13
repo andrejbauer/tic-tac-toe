@@ -3,7 +3,9 @@ package inteligenca;
 import logika.Poteza;
 
 /**
- * Poteza z oceno, kako dobra je.
+ * Poteza z oceno, kako dobra je ocena.
+ * Poteza je lahko tudi {@null} (če je npr. konec igre),
+ * v tem primeru ocena pove, kako dobra je pozicija.
  * 
  * @author andrej
  *

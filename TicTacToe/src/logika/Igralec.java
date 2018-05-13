@@ -1,8 +1,9 @@
 package logika;
 
-// V OCamlu:
-// type igralec = X | O
-
+/**
+ * @author andrej
+ * Možni igralci.
+ */
 public enum Igralec {
 	X, O;
 

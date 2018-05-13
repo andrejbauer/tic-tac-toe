@@ -61,7 +61,7 @@ public class Ocena {
 			return (jaz == Igralec.X ? (vrednostX - vrednostO/2) : (vrednostO - vrednostX/2));
 		}
 		assert false;
-		return 42; // Java ne neumna
+		return 42; // Java je blesava
 	}
 	
 }

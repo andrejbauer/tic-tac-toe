@@ -109,7 +109,7 @@ public class Igra {
 
 	/**
 	 * @param t
-	 * @return igralec, ki ima zapolnjeno terico t, ali null, če nihče
+	 * @return igralec, ki ima zapolnjeno terico @{t}, ali {@null}, če nihče
 	 */
 	private Igralec cigavaTerica(Terica t) {
 		int count_X = 0;
@@ -127,7 +127,7 @@ public class Igra {
 	}
 
 	/**
-	 * @return zmagovalna terica, ali null, če je ni
+	 * @return zmagovalna terica, ali {@null}, če je ni
 	 */
 	public Terica zmagovalnaTerica() {
 		for (Terica t : terice) {
@@ -138,9 +138,6 @@ public class Igra {
 	}
 	
 	/**
-	 * Ta metoda bi lahko bila prepočasna. Ideje za pohitritev:
-	 * ...
-	 * 
 	 * @return trenutno stanje igre
 	 */
 	public Stanje stanje() {
