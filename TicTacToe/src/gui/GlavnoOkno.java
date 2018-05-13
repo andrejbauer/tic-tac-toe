@@ -54,7 +54,10 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	private Strateg strategO;
 	
 	// Izbire v menujih
-	private JMenuItem nova_igra;
+	private JMenuItem igraClovekRacunalnik;
+	private JMenuItem igraRacunalnikClovek;
+	private JMenuItem igraClovekClovek;
+	private JMenuItem igraRacunalnikRacunalnik;
 
 	/**
 	 * Ustvari novo glavno okno in prični igrati igro.
@@ -69,9 +72,22 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		this.setJMenuBar(menu_bar);
 		JMenu igra_menu = new JMenu("Igra");
 		menu_bar.add(igra_menu);
-		nova_igra = new JMenuItem("Nova igra");
-		igra_menu.add(nova_igra);
-		nova_igra.addActionListener(this);
+
+		igraClovekRacunalnik = new JMenuItem("Človek – računalnik");
+		igra_menu.add(igraClovekRacunalnik);
+		igraClovekRacunalnik.addActionListener(this);
+		
+		igraRacunalnikClovek = new JMenuItem("Računalnik – človek");
+		igra_menu.add(igraRacunalnikClovek);
+		igraRacunalnikClovek.addActionListener(this);
+
+		igraRacunalnikRacunalnik = new JMenuItem("Računalnik – računalnik");
+		igra_menu.add(igraRacunalnikRacunalnik);
+		igraRacunalnikRacunalnik.addActionListener(this);
+
+		igraClovekClovek = new JMenuItem("Človek – človek");
+		igra_menu.add(igraClovekClovek);
+		igraClovekClovek.addActionListener(this);
 	
 		// igralno polje
 		polje = new IgralnoPolje(this);
@@ -94,8 +110,9 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		status_layout.anchor = GridBagConstraints.CENTER;
 		getContentPane().add(status, status_layout);
 		
-		// začnemo novo igro
-		nova_igra();
+		// začnemo novo igro človeka proti računalniku
+		novaIgra(new Clovek(this, Igralec.O),
+				 new Racunalnik(this, Igralec.X));
 	}
 	
 	/**
@@ -109,15 +126,15 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	 * Začni igrati novo igro. Metodo lahko pokličemo kadarkoli in
 	 * bo pravilno ustavila morebitno trenutno igro.
 	 */
-	public void nova_igra() {
+	public void novaIgra(Strateg noviSrategO, Strateg noviStrategX) {
 		// Prekinemo stratege
 		if (strategO != null) { strategO.prekini(); }
 		if (strategX != null) { strategX.prekini(); }
 		// Ustvarimo novo igro
 		this.igra = new Igra();
 		// Ustvarimo nove stratege
-		strategO = new Clovek(this, Igralec.O);
-		strategX = new Racunalnik(this, Igralec.X);
+		strategO = noviSrategO;
+		strategX = noviStrategX;
 		// Tistemu, ki je na potezi, to povemo
 		switch (igra.stanje()) {
 		case NA_POTEZI_O: strategO.na_potezi(); break;
@@ -130,8 +147,21 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == nova_igra) {
-			nova_igra();
+		if (e.getSource() == igraClovekRacunalnik) {
+			novaIgra(new Clovek(this, Igralec.O),
+					  new Racunalnik(this, Igralec.X));
+		}
+		else if (e.getSource() == igraRacunalnikClovek) {
+			novaIgra(new Racunalnik(this, Igralec.O),
+					  new Clovek(this, Igralec.X));
+		}
+		else if (e.getSource() == igraRacunalnikRacunalnik) {
+			novaIgra(new Racunalnik(this, Igralec.O),
+					  new Racunalnik(this, Igralec.X));
+		}
+		else if (e.getSource() == igraClovekClovek) {
+			novaIgra(new Clovek(this, Igralec.O),
+			          new Clovek(this, Igralec.X));
 		}
 	}
 
