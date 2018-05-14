@@ -22,13 +22,13 @@ public class Ocena {
 	 * @return koliko je vredna terica, kjer ima igralec k svojih polj, ostala so prazna
 	 */
 	public static int vrednostTerice(int k) {
-		if (k == Igra.N) { return ZMAGA; }
-		else { return (ZMAGA >> (4 * (Igra.N - k))); } // hevristična ocena
+		assert (k < Igra.N);
+		return (ZMAGA >> (4 * (Igra.N - k))); // hevristična ocena
 	}
 	
 	/**
 	 * @param jaz igralec, ki želi oceno
-	 * @param igra trentno stanje igre
+	 * @param igra trentno stanje igre (ne spreminjaj tega objekta!)
 	 * @return ocena vrednosti pozicije (če je igre konec, je ocena zagotovo pravilna)
 	 */
 	public static int oceniPozicijo(Igralec jaz, Igra igra) {
@@ -58,6 +58,7 @@ public class Ocena {
 				if (poljaX == 0 && poljaO > 0) { vrednostO += vrednostTerice(poljaX); }
 				if (poljaO == 0 && poljaX > 0) { vrednostX += vrednostTerice(poljaO); }
 			}
+			// To deljenje z 2 je verjetno brez veze ali celo narobe
 			return (jaz == Igralec.X ? (vrednostX - vrednostO/2) : (vrednostO - vrednostX/2));
 		}
 		assert false;

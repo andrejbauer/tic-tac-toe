@@ -15,8 +15,20 @@ import logika.Poteza;
  */
 public class Minimax extends SwingWorker<Poteza, Object> {
 
+	/**
+	 * Glavno okno, v katerem poteka ta igra
+	 */
 	private GlavnoOkno master;
+
+	/**
+	 * Globina, do katere pregleduje minimax
+	 */
+
 	private int globina;
+
+	/**
+	 * Ali račualnik igra X ali O?
+	 */
 	private Igralec jaz; // koga igramo
 	
 	/**
@@ -93,17 +105,18 @@ public class Minimax extends SwingWorker<Poteza, Object> {
 			Igra kopijaIgre = new Igra(igra);
 			kopijaIgre.odigraj(p);
 			// Izračunamo vrednost pozicije po odigrani potezi p
-			int ocena_p = minimax(k+1, kopijaIgre).vrednost;
+			int ocenaP = minimax(k+1, kopijaIgre).vrednost;
 			// Če je p boljša poteza, si jo zabeležimo
 			if (najboljsa == null // še nimamo kandidata za najboljšo potezo
-				|| (naPotezi == jaz && ocena_p > ocenaNajboljse) // maksimiziramo
-				|| (naPotezi != jaz && ocena_p < ocenaNajboljse) // minimiziramo
+				|| (naPotezi == jaz && ocenaP > ocenaNajboljse) // maksimiziramo
+				|| (naPotezi != jaz && ocenaP < ocenaNajboljse) // minimiziramo
 				) {
 				najboljsa = p;
-				ocenaNajboljse = ocena_p;
+				ocenaNajboljse = ocenaP;
 			}
 		}
 		// Vrnemo najboljšo najdeno potezo in njeno oceno
+		assert (najboljsa != null);
 		return new OcenjenaPoteza(najboljsa, ocenaNajboljse);
 	}
 	
