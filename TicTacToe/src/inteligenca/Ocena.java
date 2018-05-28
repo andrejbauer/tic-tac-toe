@@ -16,7 +16,6 @@ public class Ocena {
 	public static final int ZGUBA = -ZMAGA;  // vrednost izgube, mora biti -ZMAGA
 	public static final int NEODLOCENO = 0;  // vrednost neodločene igre
 
-
 	/**
 	 * @param k
 	 * @return koliko je vredna terica, kjer ima igralec k svojih polj, ostala so prazna
@@ -32,6 +31,7 @@ public class Ocena {
 	 * @return ocena vrednosti pozicije (če je igre konec, je ocena zagotovo pravilna)
 	 */
 	public static int oceniPozicijo(Igralec jaz, Igra igra) {
+		Igralec naPotezi = null;
 		switch (igra.stanje()) {
 		case ZMAGA_O:
 			return (jaz == Igralec.O ? ZMAGA : ZGUBA);
@@ -40,29 +40,30 @@ public class Ocena {
 		case NEODLOCENO:
 			return NEODLOCENO;
 		case NA_POTEZI_O:
+			naPotezi = Igralec.O;
 		case NA_POTEZI_X:
-			// Preštejemo, koliko teric ima vsak igralec
-			Polje[][] plosca = igra.getPlosca();
-			int vrednostX = 0;
-			int vrednostO = 0;
-			for (Terica t : Igra.terice) {
-				int poljaX = 0;
-				int poljaO = 0;
-				for (int k = 0; k < Igra.N && (poljaX == 0 || poljaO == 0); k++) {
-					switch (plosca[t.x[k]][t.y[k]]) {
-					case O: poljaO += 1; break;
-					case X: poljaX += 1; break;
-					case PRAZNO: break;
-					}
-				}
-				if (poljaX == 0 && poljaO > 0) { vrednostO += vrednostTerice(poljaX); }
-				if (poljaO == 0 && poljaX > 0) { vrednostX += vrednostTerice(poljaO); }
-			}
-			// To deljenje z 2 je verjetno brez veze ali celo narobe
-			return (jaz == Igralec.X ? (vrednostX - vrednostO/2) : (vrednostO - vrednostX/2));
+			naPotezi = Igralec.X;
 		}
-		assert false;
-		return 42; // Java je blesava
+		// Preštejemo, koliko teric ima vsak igralec
+		Polje[][] plosca = igra.getPlosca();
+		int vrednostX = 0;
+		int vrednostO = 0;
+		for (Terica t : Igra.terice) {
+			int poljaX = 0;
+			int poljaO = 0;
+			for (int k = 0; k < Igra.N && (poljaX == 0 || poljaO == 0); k++) {
+				switch (plosca[t.x[k]][t.y[k]]) {
+				case O: poljaO += 1; break;
+				case X: poljaX += 1; break;
+				case PRAZNO: break;
+				}
+			}
+			if (poljaX == 0 && poljaO > 0) { vrednostO += vrednostTerice(poljaX); }
+			if (poljaO == 0 && poljaX > 0) { vrednostX += vrednostTerice(poljaO); }
+		}
+		if (naPotezi == Igralec.X) { vrednostO /= 2; }
+		if (naPotezi == Igralec.O) { vrednostX /= 2; }
+		return (jaz == Igralec.X ? vrednostX - vrednostO : vrednostO - vrednostX);
 	}
 	
 }
